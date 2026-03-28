@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# VocalForLocal 🛒
+**Your Neighborhood, Delivered.**
 
-## Getting Started
+🌍 **Live Demo:** 
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+VocalForLocal is a dual-sided marketplace platform designed to bridge the gap between local neighborhood vendors and nearby consumers. Built for speed, context, and community.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Key Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 🛍️ Shopper Experience
+* **Live GPS Distance Math:** Uses HTML5 Geolocation to calculate real-time distance to vendors using the Haversine formula.
+* **Premium Dark Mode UI:** OLED-optimized UI with "cognitive chunking" for high scannability.
+* **Live Community Reviews:** Session-based state management for instant review posting.
+* **Multi-language Support:** Dynamic UI translation for wider accessibility.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🏪 Merchant Portal (Vendor Experience)
+* **Digital Chalkboard:** Real-time broadcast system for vendors to announce fresh stock.
+* **Trending Demand Ticker:** See what locals are searching for and "Claim" the demand.
+* **Micro-Boost System:** 1-click ₹10 ad boosts to jump to the top of the local feed.
 
-## Learn More
+## 💻 Tech Stack
+* **Framework:** Next.js (App Router)
+* **Styling:** Tailwind CSS v4
+* **Icons:** Lucide React
+* **Typography:** Google Fonts (Nunito)
+* **Deployment:** Netlify
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ How to Run Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/shriyanspatnaik/echelon.git](https://github.com/shriyanspatnaik/echelon.git)
+2. Navigate into the project directory:
+   cd echelon
+3. Install the dependencies:
+   npm install
+4. Start the development server:
+   npm run dev
+5. Open http://localhost:3000 in your browser.

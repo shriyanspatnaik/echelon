@@ -1,65 +1,134 @@
-import Image from "next/image";
+// app/page.js
+"use client";
 
-export default function Home() {
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { ShoppingBag, Store, Sun, Moon } from "lucide-react";
+import { LANGUAGES, useT } from "./i18n";
+
+export default function LandingPage() {
+  const router = useRouter();
+
+  // Dark mode: default true (dark)
+  const [dark, setDark] = useState(true);
+
+  // Language: default English on landing page
+  const [lang, setLang] = useState("en");
+  const t = useT(lang);
+
+  // Persist dark mode + lang in localStorage so other pages can read it
+  useEffect(() => {
+    const savedDark = localStorage.getItem("vfl_dark");
+    const savedLang = localStorage.getItem("vfl_lang");
+    if (savedDark !== null) setDark(savedDark === "true");
+    if (savedLang) setLang(savedLang);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("vfl_dark", dark);
+  }, [dark]);
+
+  useEffect(() => {
+    localStorage.setItem("vfl_lang", lang);
+  }, [lang]);
+
+  const bg = dark ? "bg-black" : "bg-[#F5F5F5]";
+  const cardBg = dark ? "bg-[#111] border-[#222]" : "bg-white border-gray-200";
+  const textPrimary = dark ? "text-white" : "text-gray-900";
+  const textSecondary = dark ? "text-gray-500" : "text-gray-400";
+  const iconBg = dark
+    ? "bg-[#FC8019]/10 border-[#FC8019]/20"
+    : "bg-[#FC8019]/10 border-[#FC8019]/30";
+  const toggleBg = dark
+    ? "bg-[#111] border-[#222] text-gray-400 hover:text-white"
+    : "bg-white border-gray-200 text-gray-500 hover:text-gray-900";
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div
+      className={`min-h-screen ${bg} transition-colors duration-300 flex flex-col`}
+    >
+      {/* ── TOP BAR: Dark toggle + Language ── */}
+      <div className="flex items-center justify-end gap-3 px-6 pt-6">
+        {/* Language Switcher */}
+        <div
+          className={`flex items-center gap-1 border rounded-2xl p-1 ${toggleBg}`}
+        >
+          {LANGUAGES.map((l) => (
+            <button
+              key={l.code}
+              onClick={() => setLang(l.code)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${
+                lang === l.code
+                  ? "bg-[#FC8019] text-white"
+                  : dark
+                    ? "text-gray-500 hover:text-white"
+                    : "text-gray-400 hover:text-gray-900"
+              }`}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              {l.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Dark / Light toggle */}
+        <button
+          onClick={() => setDark(!dark)}
+          className={`p-3 rounded-full border transition-all ${toggleBg}`}
+        >
+          {dark ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
+      </div>
+
+      {/* ── HERO ── */}
+      <div className="flex-1 flex flex-col items-center justify-center px-6 pb-10">
+        <h1
+          className={`text-5xl font-black tracking-tighter mb-2 ${textPrimary}`}
+        >
+          VocalFor<span className="text-[#FC8019]">Local</span>
+        </h1>
+        <p
+          className={`font-bold tracking-widest uppercase text-sm mb-12 ${textSecondary}`}
+        >
+          {t.tagline}
+        </p>
+
+        {/* ── ROUTE BUTTONS ── */}
+        <div className="flex flex-col sm:flex-row gap-6 w-full max-w-lg">
+          {/* Shopper */}
+          <button
+            onClick={() => router.push("/shopper")}
+            className={`flex-1 border hover:border-[#FC8019]/50 p-10 rounded-[2.5rem] flex flex-col items-center gap-5 transition-all group shadow-2xl ${cardBg} ${
+              dark ? "hover:bg-[#151515]" : "hover:bg-orange-50"
+            }`}
+          >
+            <div
+              className={`p-5 rounded-full group-hover:scale-110 transition-transform duration-300 border ${iconBg}`}
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+              <ShoppingBag size={36} className="text-[#FC8019]" />
+            </div>
+            <span className={`font-black text-xl tracking-wide ${textPrimary}`}>
+              {t.iAmShopper}
+            </span>
+          </button>
+
+          {/* Vendor */}
+          <button
+            onClick={() => router.push("/vendor")}
+            className={`flex-1 border hover:border-[#FC8019]/50 p-10 rounded-[2.5rem] flex flex-col items-center gap-5 transition-all group shadow-2xl ${cardBg} ${
+              dark ? "hover:bg-[#151515]" : "hover:bg-orange-50"
+            }`}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div
+              className={`p-5 rounded-full group-hover:scale-110 transition-transform duration-300 border ${iconBg}`}
+            >
+              <Store size={36} className="text-[#FC8019]" />
+            </div>
+            <span className={`font-black text-xl tracking-wide ${textPrimary}`}>
+              {t.iAmVendor}
+            </span>
+          </button>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 **Your Neighborhood, Delivered.**
 
 🌍 **Live Demo:** 
-
+https://echelon-ashy-alpha.vercel.app/
 
 VocalForLocal is a dual-sided marketplace platform designed to bridge the gap between local neighborhood vendors and nearby consumers. Built for speed, context, and community.
 
@@ -24,7 +24,7 @@ VocalForLocal is a dual-sided marketplace platform designed to bridge the gap be
 * **Styling:** Tailwind CSS v4
 * **Icons:** Lucide React
 * **Typography:** Google Fonts (Nunito)
-* **Deployment:** Netlify
+* **Deployment:** Vercel
 
 ## 🛠️ How to Run Locally
 
